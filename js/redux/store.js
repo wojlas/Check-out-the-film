@@ -1,0 +1,8 @@
+import { createStore, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
+
+import fetchMovies from "./reducers/fetchMovies";
+
+const store = createStore(fetchMovies, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+
+export default store;
