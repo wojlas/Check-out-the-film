@@ -1,10 +1,23 @@
 import React, {useEffect, useState} from "react"
 import Search from "./SearchView";
 import MoviesList from "./MoviesList";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { moviesFetching, moviesFetched, fetchedError } from "../../redux/actions/api_actions";
-
 import api_key from "../../api";
+
+const linkStyle= {
+    fontStyle: "Sans-serif",
+    color: "#FFFFFF",
+    fontSize: "25px",
+    textDecoration: "none",
+    margin: "15px",
+    position: "relative",
+    top: "35%",
+    transform: "translate(0, -50%)",
+    
+}
+
+
 
 const Landing = () => {
     const dispatch = useDispatch();
@@ -20,10 +33,10 @@ const Landing = () => {
 
     return (
     <>
-        <div>
-            <a href="#">Wyszukiwarka</a>
-            <a href="#">Do obejrzenia</a>
-            <a href="#">Obejrzane</a>
+        <div style={{height: "100px", width: "99%", backgroundColor: "#202020", display: "inline-block"}}> 
+            <a href="#" style={linkStyle}>Wyszukiwarka</a>
+            <a href="#" style={linkStyle}>Do obejrzenia</a>
+            <a href="#" style={linkStyle}>Obejrzane</a>
         </div>
         <div>
             <Search />
