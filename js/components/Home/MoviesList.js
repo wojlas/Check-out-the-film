@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 const SingleMovie = () => {
     const movie = useSelector(state=> state.fetchMovies)
     return (
-        <div style={{width: "140px", backgroundColor: "#E0E0E0", border: "solid black 0.5px", margin: "5px"}}>
+        <div style={{width: "140px", backgroundColor: "#E0E0E0", border: "solid black 0.5px"}}>
             {movie.movies.length === 0 ? '' :( movie.movies.map(el => {
                 return (
                     <div key={el.id}>

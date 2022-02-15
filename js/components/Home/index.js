@@ -20,6 +20,7 @@ const linkStyle= {
 
 
 const Landing = () => {
+    const [search, setSearch] = useState(false);
     const dispatch = useDispatch();
 
     useEffect(()=> {
@@ -33,13 +34,13 @@ const Landing = () => {
 
     return (
     <>
-        <div style={{height: "100px", width: "99%", backgroundColor: "#202020", display: "inline-block"}}> 
-            <a href="#" style={linkStyle}>Wyszukiwarka</a>
+        <div style={{height: "100px", width: "99%", backgroundColor: "#202020", display: "inline-block", paddingInline: "40px"}}> 
+            <a href="#" onClick={()=>setSearch(!search)} style={linkStyle}>Wyszukiwarka</a>
             <a href="#" style={linkStyle}>Do obejrzenia</a>
             <a href="#" style={linkStyle}>Obejrzane</a>
         </div>
         <div>
-            <Search />
+            {search ? <Search /> : ''}
             <MoviesList />
         </div>
     </>
