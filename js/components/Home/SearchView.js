@@ -1,11 +1,16 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
+//Component to 
 const Search = () => {  
     const [searchValue, setSearchValue] = useState('');
 
+    const dispatch = useDispatch();
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(searchValue);
+        dispatch(fetchMovies(searchValue));
+        
     }
 
     return (

@@ -2,12 +2,16 @@ import React from "react";
 import { Provider } from "react-redux";
 import store from "../redux/store";
 
-import Search from "./Home/SearchView";
+import { BrowserRouter as Router,
+    Switch,
+    Route
+ } from "react-router-dom";
+
 import Landing from "./Home";
 
 
 const Main = () => (
-    <Provider store={store} >  
+    <Provider store={store} > 
         <Landing />
     </Provider>
 )

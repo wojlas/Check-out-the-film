@@ -1,16 +1,20 @@
-import { SAVE_MOVIES, FETCHED_ERROR } from "../actions/api_actions";
+import { SAVE_MOVIES, FETCHED_ERROR, GET_MOVIES } from "../actions/api_actions";
 
 const initialState = {
     movies: [],
     error: '',
+    loading: false,
 }
 
-const fetchMovies = (state=[], action) => {
+const fetchMovies = (state=initialState, action) => {
     switch (action.type) {
+        case GET_MOVIES:
+            return {...state, loading: true};
         case SAVE_MOVIES:
-            return {...state, movies: action.payload};
+            return {...state, movies: [{id: (state.length > 0 ? Number(state[state.length-1].id+1) : Number(1)), value: action.payload}], loading: false};
         case FETCHED_ERROR:
-            return {...state, error: action.payload};
+            return {...state, error: action.payload, loading: false};
+        default: return state;
     }
 }
 
