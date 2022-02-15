@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react"
 import Search from "./SearchView";
-import SingleMovie from "./SingleMovie";
+import MoviesList from "./MoviesList";
 import { useDispatch, useSelector } from "react-redux";
 import { moviesFetching, moviesFetched, fetchedError } from "../../redux/actions/api_actions";
 
@@ -27,7 +27,7 @@ const Landing = () => {
         </div>
         <div>
             <Search />
-            <SingleMovie />
+            <MoviesList />
         </div>
     </>
 )};
