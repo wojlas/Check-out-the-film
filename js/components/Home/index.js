@@ -18,7 +18,9 @@ const linkStyle= {
 }
 
 
-
+// landing app page including menu bar on the top witch search movie widget
+// and links to pages witch movies to watch and rating movies
+// Below we have a list of films
 const Landing = () => {
     const [search, setSearch] = useState(false);
     const dispatch = useDispatch();

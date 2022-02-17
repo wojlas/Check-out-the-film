@@ -16,7 +16,12 @@ const fetchMovies = (state=initialState, action) => {
         case FETCHED_ERROR:
             return {...state, error: action.payload, loading: false};
         case SEARCH_MOVIE:
-            return [...state.movies].filter(movie=> movie.value.Title !== action.payload);
+            if (action.payload === '') {
+                return state;
+            } else {
+                const searchedTitle = [...state.movies].filter(el => el.value.Title.toLowerCase().includes(action.payload.toLowerCase()));
+                return {...state, movies: [...searchedTitle]}
+            }
         default: return state;
     }
 }
