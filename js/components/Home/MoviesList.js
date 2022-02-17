@@ -1,16 +1,24 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { useSelector } from "react-redux";
 
 const MoviesList = () => {
     const movie = useSelector(state=> state.fetchMovies)
+    const [movies, setMovies] = useState([])
+
+    useEffect(() => {
+        setMovies(movie.movies);
+    }, [movie]);
+    
     return (
-        <div style={{width: "140px", backgroundColor: "#E0E0E0", border: "solid black 0.5px"}}>
-            {movie.movies ? ( movie.movies.map(el => {
+        <div >
+            {movies ? ( movies.map(el => {
                 return (
-                    <div key={el.id}>
-                        <h3>{el.value.Title}</h3>
-                        <img src={el.value.Poster} style={{height: "100%", width: "100%"}}/>
-                        <h5>{el.value.Actors}</h5>
+                    <div key={el.id} 
+                    style={{width: "140px", height: "180px" ,backgroundColor: "#E0E0E0", 
+                    border: "solid black 0.5px", margin: "3px", float: "left"}}>
+                        <h3>{el.title}</h3>
+                        {/* <img src={el.Poster} style={{height: "100%", width: "100%"}}/> */}
+                        <h5>{el.release_date}</h5>
                     </div>
                 )
             })) : ''

@@ -3,7 +3,7 @@ import Search from "./SearchView";
 import MoviesList from "./MoviesList";
 import { useDispatch } from "react-redux";
 import { moviesFetching, moviesFetched, fetchedError } from "../../redux/actions/api_actions";
-import api_key from "../../api";
+import api_url from "../../api";
 
 const linkStyle= {
     fontStyle: "Sans-serif",
@@ -27,11 +27,12 @@ const Landing = () => {
 
     useEffect(()=> {
         dispatch(moviesFetching());
-
-        fetch(api_key)
+        for (let i=1; i<=10; i++) {
+        fetch(api_url + i)
             .then(resp=> resp.json())
             .then(resp=> dispatch(moviesFetched(resp)))
-            .catch(error=> dispatch(fetchedError(error)))   
+            .catch(error=> dispatch(fetchedError(error))) 
+        }  
     },[])
 
     return (
@@ -43,6 +44,8 @@ const Landing = () => {
         </div>
         <div>
             {search ? <Search /> : ''}
+        </div>
+        <div>
             <MoviesList />
         </div>
     </>
