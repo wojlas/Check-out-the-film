@@ -27,7 +27,7 @@ const Landing = () => {
 
     useEffect(()=> {
         dispatch(moviesFetching());
-        for (let i=1; i<=10; i++) {
+        for (let i=1; i<10; i++) {
         fetch(api_url + i)
             .then(resp=> resp.json())
             .then(resp=> dispatch(moviesFetched(resp)))
@@ -37,15 +37,15 @@ const Landing = () => {
 
     return (
     <>
-        <div style={{height: "100px", width: "99%", backgroundColor: "#202020", display: "inline-block", paddingInline: "40px"}}> 
-            <a href="#" onClick={()=>setSearch(!search)} style={linkStyle}>Wyszukiwarka</a>
-            <a href="#" style={linkStyle}>Do obejrzenia</a>
-            <a href="#" style={linkStyle}>Obejrzane</a>
+        <div style={{height: "100px", width: "98%", backgroundColor: "#202020", display: "inline-block", paddingInline: "40px"}}> 
+            <a href="#" onClick={()=>setSearch(!search)} style={linkStyle}>Search</a>
+            <a href="#" style={linkStyle}>To View</a>
+            <a href="#" style={linkStyle}>Viewed On</a>
         </div>
-        <div>
-            {search ? <Search /> : ''}
+        <div onBlur={()=> setSearch(false)}>
+            {search ? <Search/> : ''}
         </div>
-        <div>
+        <div onClick={()=> setSearch(false)}>
             <MoviesList />
         </div>
     </>
