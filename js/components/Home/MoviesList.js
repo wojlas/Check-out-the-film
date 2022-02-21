@@ -15,7 +15,7 @@ const MoviesList = () => {
         <div style={{float: "left", display: "block"}}>
             {movies ? ( movies.map((el, key) => {
                 return (
-                    <Link to={`/movie/${el.id}`} ><div key={key++} 
+                    <Link to={`/movie/${el.id}`} key={key++} ><div key={key++} 
                     style={{width: "180px", height: "220px" ,backgroundColor: "#E0E0E0", 
                     border: "solid black 0.5px", margin: "3px", float: "left", padding: "1px"}}>
                         <div style={{height: "30%", width: "100%", fontSize: "20px", fontStyle: "Sans-serif"}}>{el.title}</div>

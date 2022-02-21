@@ -6,6 +6,7 @@ import { searchMovie } from "../../redux/actions/search_movies";
 const Search = () => {  
     const [searchValue, setSearchValue] = useState('');
     const dispatch = useDispatch();
+    
 
     useEffect(()=> {
         setTimeout(()=> {

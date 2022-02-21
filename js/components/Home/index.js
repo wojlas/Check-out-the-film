@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { moviesFetching, moviesFetched, fetchedError } from "../../redux/actions/api_actions";
 import api_url from "../../api";
 
-const linkStyle= {
+export const linkStyle= {
     fontStyle: "Sans-serif",
     color: "#FFFFFF",
     fontSize: "25px",
