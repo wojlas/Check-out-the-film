@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { singleMovie } from "../../redux/actions/single_movie";
 import { rateMovie } from "../../redux/actions/movieRate";
+import { toWatch } from "../../redux/actions/movieRate";
 import { Link } from "react-router-dom";
 import { linkStyle } from "../Home";
 import { poster_url } from "../../api";
@@ -37,6 +38,11 @@ const SingleMovie = (props) => {
         dispatch(rateMovie({id: movie.id, rate: rate}))
     }
 
+    const addToWatch = e => {
+        e.preventDefault();
+        dispatch(toWatch(movie.id))
+    }
+
 
     return (
         <>
@@ -70,6 +76,7 @@ const SingleMovie = (props) => {
                     <input type="radio" checked={rate==9} onChange={() => setRate(9)} />9
                     <input type="radio" checked={rate==10} onChange={() => setRate(10)} />10
                     <button onClick={(e) => handleVote(e)} >Vote!</button>
+                    <button onClick={(e) => addToWatch(e)}>To watch</button>
                 </div>
                 <div style={{float: "left", textAlign: "justify", height: "100px", width: "915px", border: "1px solid black"}}>
                     {movie.overview}
