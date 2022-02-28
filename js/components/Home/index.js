@@ -3,7 +3,8 @@ import Search from "./SearchView";
 import MoviesList from "./MoviesList";
 import { useDispatch } from "react-redux";
 import { moviesFetching, moviesFetched, fetchedError } from "../../redux/actions/api_actions";
-import api_url from "../../api";
+import { fetchGenres } from "../../redux/actions/single_movie";
+import api_url, { api_genres } from "../../api";
 
 export const linkStyle= {
     fontStyle: "Sans-serif",
@@ -33,6 +34,12 @@ const Landing = () => {
             .then(resp=> dispatch(moviesFetched(resp)))
             .catch(error=> dispatch(fetchedError(error))) 
         }  
+
+        fetch(api_genres)
+            .then(resp=> resp.json())
+            .then(resp=> dispatch(fetchGenres(resp)))
+            .catch(error=> dispatch(fetchedError(error))) 
+
     },[])
 
     return (
