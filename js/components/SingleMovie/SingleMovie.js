@@ -1,15 +1,18 @@
 import React, {useState, useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { singleMovie } from "../../redux/actions/single_movie";
+import { rateMovie } from "../../redux/actions/movieRate";
 import { Link } from "react-router-dom";
 import { linkStyle } from "../Home";
 import { poster_url } from "../../api";
 
+//single movie page display menu on top and movie details
 const SingleMovie = (props) => {
     const {match} = props;
 
     const [movie, setMovie] = useState(null);
     const [movieGenres, setMovieGenres] = useState(null);
+    const [rate, setRate] = useState({})
     const dispatch = useDispatch();
     const stateMovies = useSelector(state => state.fetchMovies);
     const stateGenres = useSelector(state => state.genres);
@@ -28,13 +31,17 @@ const SingleMovie = (props) => {
             setMovieGenres(stateGenres[0].filter(genre => movie.genre_ids.some(id => id === genre.id)))
         }
     }, [movie])
-    
+
+    const handleVote = (e) => {
+        e.preventDefault();
+        dispatch(rateMovie({id: movie.id, rate: rate}))
+    }
 
 
     return (
         <>
         <div style={{height: "100px", width: "98%", backgroundColor: "#202020", display: "inline-block", paddingInline: "40px"}}> 
-            <Link to="/" style={linkStyle} > Home </Link>
+            <Link to="/" style={linkStyle} >Home</Link>
             <a href="#" style={linkStyle}>To View</a>
             <a href="#" style={linkStyle}>Viewed On</a>
         </div>
@@ -51,6 +58,19 @@ const SingleMovie = (props) => {
                 <div>Genres: {movieGenres ? (movieGenres.map(genre => {
                     return <span key={genre.id}> {genre.name}</span>
                 })) : ''}</div>
+                <div>
+                    <input type="radio" checked={rate==1} onChange={() => setRate(1)} />1
+                    <input type="radio" checked={rate==2} onChange={() => setRate(2)} />2
+                    <input type="radio" checked={rate==3} onChange={() => setRate(3)} />3
+                    <input type="radio" checked={rate==4} onChange={() => setRate(4)} />4
+                    <input type="radio" checked={rate==5} onChange={() => setRate(5)} />5
+                    <input type="radio" checked={rate==6} onChange={() => setRate(6)} />6
+                    <input type="radio" checked={rate==7} onChange={() => setRate(7)} />7
+                    <input type="radio" checked={rate==8} onChange={() => setRate(8)} />8
+                    <input type="radio" checked={rate==9} onChange={() => setRate(9)} />9
+                    <input type="radio" checked={rate==10} onChange={() => setRate(10)} />10
+                    <button onClick={(e) => handleVote(e)} >Vote!</button>
+                </div>
                 <div style={{float: "left", textAlign: "justify", height: "100px", width: "915px", border: "1px solid black"}}>
                     {movie.overview}
                 </div>

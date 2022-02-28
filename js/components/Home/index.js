@@ -53,7 +53,7 @@ const Landing = () => {
             {search ? <Search/> : ''}
         </div>
         <div onClick={()=> setSearch(false)}>
-            <MoviesList />
+            <MoviesList/>
         </div>
     </>
 )};
