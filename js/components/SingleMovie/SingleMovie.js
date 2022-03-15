@@ -13,18 +13,26 @@ const SingleMovie = (props) => {
 
     const [movie, setMovie] = useState(null);
     const [movieGenres, setMovieGenres] = useState(null);
-    const [rate, setRate] = useState({})
+    const [rate, setRate] = useState({});
+    const [yourVote, setYourVote] = useState({status: false, rate: 0});
     const dispatch = useDispatch();
     const stateMovies = useSelector(state => state.fetchMovies);
     const stateGenres = useSelector(state => state.genres);
+    const rateState = useSelector(state => state.rates);
 
     useEffect(()=> {
         dispatch(singleMovie(match.params.id))
+        if (rateState) {
+            rateState.forEach(element => {
+                if (element.id === Number(match.params.id)) {
+                    setYourVote({status: true, rate: element.rate})
+                }
+            })
+        }
     }, []);
 
     useEffect(()=> {
         setMovie(stateMovies[0]);
-        
     }, [stateMovies]);
 
     useEffect(()=> {
@@ -35,7 +43,8 @@ const SingleMovie = (props) => {
 
     const handleVote = (e) => {
         e.preventDefault();
-        dispatch(rateMovie({id: movie.id, rate: rate}))
+        dispatch(rateMovie({id: movie.id, rate: rate}));
+        setYourVote({status: true, rate: rate});
     }
 
     const addToWatch = e => {
@@ -64,7 +73,7 @@ const SingleMovie = (props) => {
                 <div>Genres: {movieGenres ? (movieGenres.map(genre => {
                     return <span key={genre.id}> {genre.name}</span>
                 })) : ''}</div>
-                <div>
+                {!yourVote.status ? (<div>
                     <input type="radio" checked={rate==1} onChange={() => setRate(1)} />1
                     <input type="radio" checked={rate==2} onChange={() => setRate(2)} />2
                     <input type="radio" checked={rate==3} onChange={() => setRate(3)} />3
@@ -77,7 +86,9 @@ const SingleMovie = (props) => {
                     <input type="radio" checked={rate==10} onChange={() => setRate(10)} />10
                     <button onClick={(e) => handleVote(e)} >Vote!</button>
                     <button onClick={(e) => addToWatch(e)}>To watch</button>
-                </div>
+                </div>) : (
+                    <div>Your vote: {yourVote.rate} </div>
+                )}
                 <div style={{float: "left", textAlign: "justify", height: "100px", width: "915px", border: "1px solid black"}}>
                     {movie.overview}
                 </div>
