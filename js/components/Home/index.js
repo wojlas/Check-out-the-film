@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { moviesFetching, moviesFetched, fetchedError } from "../../redux/actions/api_actions";
 import { fetchGenres } from "../../redux/actions/single_movie";
 import api_url, { api_genres } from "../../api";
+import { Link } from "react-router-dom";
 
 export const linkStyle= {
     fontStyle: "Sans-serif",
@@ -46,8 +47,8 @@ const Landing = () => {
     <>
         <div style={{height: "100px", width: "98%", backgroundColor: "#202020", display: "inline-block", paddingInline: "40px"}}> 
             <a href="#" onClick={()=>setSearch(!search)} style={linkStyle}>Search</a>
-            <a href="#" style={linkStyle}>To View</a>
-            <a href="#" style={linkStyle}>Viewed On</a>
+            <Link to="/toview" style={linkStyle}>To View</Link>
+            <Link to="/viewed" style={linkStyle}>Viewed On</Link>
         </div>
         <div onBlur={()=> setSearch(false)}>
             {search ? <Search/> : ''}
