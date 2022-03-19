@@ -1,4 +1,5 @@
 import { SAVE_MOVIES, FETCHED_ERROR, GET_MOVIES } from "../actions/api_actions";
+import { SHOW_RATED } from "../actions/movieRate";
 import { SEARCH_MOVIE } from "../actions/search_movies";
 import { SINGLE_MOVIE } from "../actions/single_movie";
 
@@ -8,15 +9,16 @@ const initialState = {
     loading: false,
 }
 
-const fetchedMovies = [];
+let fetchedMovies = [];
 
 const fetchMovies = (state=initialState, action) => {
     switch (action.type) {
         case GET_MOVIES:
+            fetchedMovies = [];
             return {...state, loading: true};
         case SAVE_MOVIES:
             action.payload.results.forEach(el => {
-                fetchedMovies.push(el)
+                    fetchedMovies.push(el)
             });
             return {...state, movies: fetchedMovies, loading: false};
         case FETCHED_ERROR:
@@ -29,8 +31,11 @@ const fetchMovies = (state=initialState, action) => {
                 return {...state, movies: [...searchedTitle]}
             };
         case SINGLE_MOVIE:
-            const stateCopy = state.movies;
-            return stateCopy.filter(el=> el.id === Number(action.payload));            
+            const stateCopy = state.movies.filter(el=> el.id === Number(action.payload));
+            return {...state, movies: [...stateCopy]};
+        case SHOW_RATED:
+            const ratedMovies = [...state.movies].filter(el => action.payload.includes(el.id));
+            return {...state, movies: ratedMovies, loading: 'rated'}
         default: return state;
     }
 }

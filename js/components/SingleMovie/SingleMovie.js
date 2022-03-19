@@ -30,9 +30,8 @@ const SingleMovie = (props) => {
             })
         }
     }, []);
-
     useEffect(()=> {
-        setMovie(stateMovies[0]);
+        setMovie(stateMovies.movies[0]);
     }, [stateMovies]);
 
     useEffect(()=> {
@@ -57,8 +56,8 @@ const SingleMovie = (props) => {
         <>
         <div style={{height: "100px", width: "98%", backgroundColor: "#202020", display: "inline-block", paddingInline: "40px"}}> 
             <Link to="/" style={linkStyle} >Home</Link>
-            <a href="#" style={linkStyle}>To View</a>
-            <a href="#" style={linkStyle}>Viewed On</a>
+            <Link to="/toview" style={linkStyle}>To View</Link>
+            <Link to="/viewed" style={linkStyle}>Viewed On</Link>
         </div>
         {movie ? (
             <div style={{backgroundColor: "#E0E0E0", marginTop: "15px",}}>

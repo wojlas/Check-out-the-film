@@ -40,7 +40,7 @@ const Landing = () => {
             .then(resp=> resp.json())
             .then(resp=> dispatch(fetchGenres(resp)))
             .catch(error=> dispatch(fetchedError(error))) 
-
+        
     },[])
 
     return (
