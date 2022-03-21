@@ -88,7 +88,7 @@ const SingleMovie = (props) => {
                 </div>) : (
                     <div>Your vote: {yourVote.rate} </div>
                 )}
-                <div style={{float: "left", textAlign: "justify", height: "100px", width: "915px", border: "1px solid black"}}>
+                <div style={{float: "left", textAlign: "justify", height: "100px", width: "70%", border: "1px solid black"}}>
                     {movie.overview}
                 </div>
                 <div style={{textAlign: "right", fontStyle: "Sans-serif", color: "#FFFFFF", fontSize: "25px", textDecoration: "none",}}><Link to="/">BACK</Link></div>

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { linkStyle } from "../Home";
 import { showRated } from "../../redux/actions/movieRate";
+import SingleListElementMovie from "./SingleListElementMovie";
 
 const ViewedOn = () => {
     const [viewedMovies, setViewedMovies] = useState({movies: [], loading: false});
@@ -20,7 +21,7 @@ const ViewedOn = () => {
     useEffect(()=> {
         setViewedMovies({movies: moviesState.movies, loading: moviesState.loading});
     }, [moviesState]);
-    console.log(moviesState)
+    console.log([...viewedState])
 
     return (
         <>
@@ -29,10 +30,11 @@ const ViewedOn = () => {
                 <Link to="/toview" style={linkStyle}>To View</Link>
                 <Link to="/viewed" style={linkStyle}>Viewed On</Link>
             </div>
-            <div>
+            <div style={{textAlign: "center"}}>
             {viewedMovies.loading === 'rated' && viewedMovies.movies.length > 0?
             (viewedMovies.movies.map(movie => {
-                return <div key={movie.id}>{movie.title} {movie.release_date}</div>
+                const rateID = viewedState.find(el => el.id === movie.id);
+                return <SingleListElementMovie key={movie.id} movie={movie} rates={rateID} />
             }))
              : ''}
             </div>
